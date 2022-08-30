@@ -12,19 +12,25 @@ private:
 public:
     void readpoly(void)
     {
-        cout << "Enter the number of coefficients in the first polynomial\n";
+        cout << "Enter the number of coefficients in the first polynomial:\n";
         cin >> n1;
-        cout << "Enter the coefficients and exponents\n";
+        cout<<"Enter the Coefficients and Exponents for the first polynomial:\n";
         for (i = 0; i < n1; i++)
         {
-            cin >> p1[i].coeff >> p1[i].exp;
+            cout<<"Enter the Coefficient:\n";
+            cin >> p1[i].coeff;
+            cout<<"Enter the Exponent:\n";
+            cin>>p1[i].exp;
         }
-        cout << "Enter the number of coefficients in the second polynomial\n";
+        cout << "Enter the number of coefficients in the second polynomial:\n";
         cin >> n2;
-        cout << "Enter the coefficients and exponents\n";
+        cout<<"Enter the Coefficients and Exponents for the first polynomial:\n";
         for (j = 0; j < n2; j++)
         {
-            cin >> p2[j].coeff >> p2[j].exp;
+            cout<<"Enter the Coefficient:\n";
+            cin >> p2[j].coeff;
+            cout<<"Enter the Exponent:\n";
+            cin>>p2[j].exp;
         }
     }
     void addpoly(void)
