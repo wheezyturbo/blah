@@ -1,69 +1,114 @@
 #include <iostream>
 using namespace std;
-class singlylinkedlist
+class node
 {
-    private:
-        struct node
+private:
+    int data;
+    node *link;
+    node *head;
+
+public:
+    node()
+    {
+        head = NULL;
+        data = 0;
+        link = NULL;
+    }
+    void insertnode()
+    {
+        node *temp = new node;
+        cout << "Enter the item to be inserted:\n";
+        cin >> temp->data;
+        if (head == NULL)
         {
-            int data;
-            struct node *link;
-        };
-    public:
-        struct node *head =NULL;
-        void displaylist(void)
+            head = temp;
+        }
+        else
         {
-            struct node *ptr = head;
-            cout<<"\n[ ";
-            while(ptr!=NULL)
+            node *ptr = head;
+            while (ptr->link != NULL)
             {
-                cout<<ptr->data;
                 ptr = ptr->link;
             }
-            cout<<" ]"<<endl;
+            ptr->link = temp;
         }
-        void insert(void)
+    }
+    void printll(void)
+    {
+        node *ptr = head;
+        if (head == NULL)
         {
-            int item;
-            struct node * ptr = new struct node;
-            cout<<"Enter the item to be inserted:\n";
-            cin>>item;
-            struct node *temp;
-            temp->data = item;
-            temp->link = NULL;
-            ptr = head;
-            if(ptr = NULL)
-            {
-                head = temp;
-                displaylist();
-            }
-            else
-            {
-                while(ptr->link!=NULL)
-                {
-                    ptr = ptr->link;
-                }
-                ptr->link = temp;
-            }
+            cout << "List empty:\n";
         }
+        else
+        {
+            cout << "[ ";
+            while (ptr != NULL)
+            {
+                cout << ptr->data << " ";
+                ptr = ptr->link;
+            }
+            cout << "]" << endl;
+        }
+    }
+    void deleteitem(void)
+    {
+        int x;
+        cout << "Enter the item to be deleted:\n";
+        cin >> x;
+        deleteNode(&head, x);
+    }
+    void deleteNode(node **head, int item)
+    {
+        node *ptr = *head;
+        node *prev = NULL;
+
+        if (ptr != NULL && ptr->data == item)
+        {
+            *head = ptr->link;
+            delete ptr;       
+            return;
+        }
+        else
+        {
+            while (ptr != NULL && ptr->data != item)
+            {
+                prev = ptr;
+                ptr = ptr->link;
+            }
+            if (ptr == NULL)
+                return;
+
+            prev->link = ptr->link;
+            delete ptr;
+        }
+    }
 };
 int main()
 {
-    singlylinkedlist a;
+    node a;
     int opt;
     do
     {
-        cout<<"Select the appropriate option:\n1. Display List\n2. Insert items\n3. Quit\n";
-        cin>>opt;
-        switch(opt)
+        cout << "Enter the option \n1. Insert\n2. Traverse \n3. Delete\n4. Exit\n";
+        cin >> opt;
+        switch (opt)
         {
-            case 1: a.displaylist();
+        case 1:
+            a.insertnode();
             break;
-            case 2: a.insert();
+        case 2:
+            a.printll();
             break;
-            case 3: cout<<"Terminating...\n";
+        case 3:
+            a.deleteitem();
             break;
-            default: cout<<"Enter a valid option...\n";
+        case 4:
+            cout << "Terminating...\n";
+            break;
+        default:
+            cout << "Enter a valid option...\n";
         }
-    } while (opt!=3);
+    } while (opt != 4);
     return 0;
 }
