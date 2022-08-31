@@ -53,20 +53,16 @@ public:
     }
     void deleteitem(void)
     {
-        int x;
+        int item;
         cout << "Enter the item to be deleted:\n";
-        cin >> x;
-        deleteNode(&head, x);
-    }
-    void deleteNode(node **head, int item)
-    {
-        node *ptr = *head;
+        cin >> item;
+        node *ptr = head;
         node *prev = NULL;
 
         if (ptr != NULL && ptr->data == item)
         {
-            *head = ptr->link;
-            delete ptr;       
+            head = ptr->link;
+            delete ptr;
             return;
         }
         else
